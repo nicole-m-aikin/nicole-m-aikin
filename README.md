@@ -66,13 +66,13 @@ Pixel-wise geochemical data can be effectively classified using relatively simpl
 👉 https://github.com/nicole-m-aikin/ML-Geo-Pixel-Poppers
 
 <p align="center">
-  <img src="Grt.pptx.svg" width="90%">
+  <img src="Grt.pptx.svg" width="100%">
 </p>
 
 *Example output 1: Random Forest classification achieves >96% accuracy for garnet, accurately recovering spatially coherent domains (garnet porphyroblast) directly from pixel-wise geochemical features.*
 
 <p align="center">
-  <img src="Bt.pptx.svg" width="90%">
+  <img src="Bt.pptx.svg" width="100%">
 </p>
 
 *Example output 2: Random Forest Classification achieves ~80% accuracy for biotite, reflecting greater compositional overlap and complexity, but the model still captures spatially coherent foliation-parallel mineral domains.*
