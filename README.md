@@ -20,12 +20,13 @@ Focus: identifying growth histories and chemical structure in polymetamorphic sy
 Key Insight: This approach enables identification of chemically distinct growth domains that are difficult to resolve through traditional inspection alone.
 
 👉 https://github.com/nicole-m-aikin/RockClock
+*Note: RockClock is part of ongoing collaborative research, & public-facing version and documentation will be released following publication. Happy to discuss in more detail in the meantime!*
 
 ![RockClock workflow](Fig6.png)
 
 *Pipeline overview: geochemical maps are converted into pixel-wise feature vectors, reduced using PCA, clustered into chemically distinct groups, and mapped back into spatially coherent domains.*
 
-*Note: RockClock is part of ongoing collaborative research, & public-facing version and documentation will be released following publication. Happy to discuss in more detail in the meantime!*
+
 
 ---
 
