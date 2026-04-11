@@ -71,17 +71,7 @@ Pixel-wise geochemical data can be effectively classified using relatively simpl
 
 ---
 
-## Why this approach?
-
-* prioritizes interpretability and physical meaning over black-box models  
-* leverages spatial + compositional structure inherent in geochemical data  
-* performs well on small, domain-specific datasets  
-* reduces overfitting by combining dimensionality reduction with constrained model complexity  
-* emphasizes reproducibility and transparency in feature construction and classification  
-
----
-
-## Why this approach?
+**Why this approach?**
 
 * prioritizes interpretability and physical meaning over black-box models  
 * leverages spatial + compositional structure inherent in geochemical data  
