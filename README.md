@@ -21,7 +21,7 @@ Key Insight: This approach enables identification of chemically distinct growth 
 
 👉 https://github.com/nicole-m-aikin/RockClock
 
-![RockClock workflow](https://raw.githubusercontent.com/nicole-m-aikin/RockClock/main/Fig6.png)
+![RockClock workflow](Fig6.png)
 
 *Pipeline overview: geochemical maps are converted into pixel-wise feature vectors, reduced using PCA, clustered into chemically distinct groups, and mapped back into spatially coherent domains.*
 
