@@ -17,15 +17,28 @@ End-to-end pipeline for transforming EPMA/XRF maps into interpretable chemical d
 * clustering (KMeans, GMM)
 
 Focus: identifying growth histories and chemical structure in polymetamorphic systems
+
 Key Insight: This approach enables identification of chemically distinct growth domains that are difficult to resolve through traditional inspection alone.
 
 👉 https://github.com/nicole-m-aikin/RockClock
+
 *Note: RockClock is part of ongoing collaborative research, & public-facing version and documentation will be released following publication. Happy to discuss in more detail in the meantime!*
 
 ![RockClock workflow](Fig6.png)
 
 *Pipeline overview: geochemical maps are converted into pixel-wise feature vectors, reduced using PCA, clustered into chemically distinct groups, and mapped back into spatially coherent domains.*
 
+#### Why RockClock?
+
+Traditional workflows for interpreting geochemical maps often rely on manual inspection and subjective classification.
+
+RockClock provides a reproducible, data-driven alternative that:
+
+* preserves spatial context
+* captures multi-element chemical relationships
+* detects subtle or overprinted domains
+
+The goal is not just classification, but **interpretable and reproducible analysis**: linking chemical structure to geological processes such as mineral growth, metamorphism, and melt evolution.
 
 
 ---
@@ -55,7 +68,9 @@ Focus: automating bulk composition extraction from thin section data
 ## Background
 
 MS Earth & Space Sciences, University of Washington
+
 NSF Graduate Research Fellow
+
 BS Earth Sciences, University of California, Santa Barbara
 
 *CV available upon request*
