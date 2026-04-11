@@ -16,13 +16,13 @@ End-to-end pipeline for transforming EPMA/XRF maps into interpretable chemical d
 * PCA
 * clustering (KMeans, GMM)
 
-Focus: identifying growth histories and chemical structure in polymetamorphic systems
+**Focus:** identifying growth histories and chemical structure in polymetamorphic systems
 
-Key Insight: This approach enables identification of chemically distinct growth domains that are difficult to resolve through traditional inspection alone.
+**Key Insight:** This approach enables identification of chemically distinct growth domains that are difficult to resolve through traditional inspection alone.
 
-👉 https://github.com/nicole-m-aikin/RockClock
+👉 Repository currently private (happy to discuss!) *
 
-*Note: RockClock is part of ongoing collaborative research, & public-facing version and documentation will be released following publication. Happy to discuss in more detail in the meantime!*
+*Note: RockClock is part of ongoing collaborative research, & public-facing version and documentation will be released following publication.*
 
 ![RockClock workflow](Fig6.png)
 
@@ -34,9 +34,11 @@ Traditional workflows for interpreting geochemical maps often rely on manual ins
 
 RockClock provides a reproducible, data-driven alternative that:
 
+* supports reproducible, data-driven domain identification
 * preserves spatial context
 * captures multi-element chemical relationships
 * detects subtle or overprinted domains
+  
 
 The goal is not just classification, but **interpretable and reproducible analysis**: linking chemical structure to geological processes such as mineral growth, metamorphism, and melt evolution.
 
@@ -45,15 +47,35 @@ The goal is not just classification, but **interpretable and reproducible analys
 
 ### ML Geo Pixel Classification — Mineral Identification
 
-Supervised ML workflow for classifying mineral phases from chemical maps using:
+Supervised machine learning workflow for classifying mineral phases from multi-element geochemical maps using pixel-wise feature vectors.
 
-* manual labeling + feature engineering
-* PCA + exploratory analysis
-* Random Forest classification
+This project serves as a proof-of-concept for translating spatially structured geochemical data into mineral classifications using interpretable models, even in highly deformed and chemically overprinted systems.
 
-Focus: automating bulk composition extraction from thin section data
+**Workflow:**
+* manual labeling + feature engineering  
+* PCA + exploratory analysis  
+* Random Forest classification + grid search  
+
+**Focus:** automating mineral identification and bulk composition extraction from thin section data  
+
+**Key Insight:**  
+Pixel-wise geochemical data can be effectively classified using relatively simple, interpretable models, demonstrating that robust mineral identification does not require complex deep learning architectures when domain structure is preserved.
 
 👉 https://github.com/nicole-m-aikin/ML-Geo-Pixel-Poppers
+
+<img src="https://raw.githubusercontent.com/nicole-m-aikin/ML-Geo-Pixel-Poppers/main/Presentation_images/Grt.svg" width="600">
+
+*Example output: Random Forest classification achieves >96% accuracy for garnet, accurately recovering spatially coherent domains (garnet porphyroblast) directly from pixel-wise geochemical features.*
+
+---
+
+## Why this approach?
+
+* prioritizes interpretability and physical meaning over black-box models  
+* leverages spatial + compositional structure inherent in geochemical data  
+* performs well on small, domain-specific datasets  
+* reduces overfitting by combining dimensionality reduction with constrained model complexity  
+* emphasizes reproducibility and transparency in feature construction and classification  
 
 ---
 
