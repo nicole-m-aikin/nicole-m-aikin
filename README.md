@@ -18,6 +18,8 @@ I tend to approach ML as one line of evidence inside a geological decision frame
 
 ### Au + REE Placer Assessment Pipeline
 
+*In plain terms: I took decades of public government data on rocks, streams, and old mine sites and built a tool that ranks the most promising places to look for gold and rare earth elements in northeastern Washington, then checks whether mining any of them would actually pay off.*
+
 A config-driven, 10-module mineral exploration workflow for evaluating co-placer rare earth element and gold potential in northeastern Washington.
 
 The pipeline integrates:
@@ -55,6 +57,8 @@ The goal is not to identify anomalous ground alone, but to connect geological ev
 
 ### Critical Minerals ASTER
 
+*In plain terms: satellites can sense heat patterns from space that hint at certain kinds of mineral deposits underground. This project tests whether that heat signal actually finds real deposits, or just re-finds the places people already explored decades ago, and it's built with statistical checks specifically designed to catch itself being fooled.*
+
 A remote sensing pipeline testing whether ASTER thermal infrared alteration signals correspond with known critical mineral occurrences, now covering 109 USGS Earth MRI districts across the western US.
 
 The workflow validates satellite-derived spectral anomalies against USGS MRDS deposit records under a statistical framework built to catch its own false positives: a site-specific geometric null in place of an earlier pooled-null version that manufactured significance at sites with unusually large anomaly zones, Benjamini-Hochberg FDR correction across both a binomial test and a threshold-free continuous-score test, DBSCAN spatial declustering of non-independent MRDS records, and a classification-threshold sensitivity sweep.
@@ -86,6 +90,8 @@ python -m critical_minerals_aster demo
 
 ### RockClock
 
+*In plain terms: monazite crystals record a rock's history the way tree rings record a tree's, but reading those rings by eye means two scientists can look at the same crystal and reach different conclusions. RockClock flags the different chemical "rings" inside a crystal using a documented, repeatable process, then hands the reading to a geologist to confirm rather than treating the computer's output as the final word.*
+
 A pipeline for identifying chemically distinct domains in accessory minerals from electron microprobe (EMPA) chemical maps, developed during graduate research on U-Th-Pb monazite geochronology in a polydeformed migmatite (Grand Canyon).
 
 As of September 2026, RockClock is undergoing a full reproducibility and provenance audit ahead of publication. The project is being reframed from a domain-classification demo into a provenance-first workflow: it proposes candidate chemical regions and phase boundaries without automatically naming minerals or geological events, and every domain, phase, and age assignment routes through geologist review rather than treating a statistical cluster as a finished interpretation.
@@ -95,6 +101,8 @@ Reproducibility infrastructure is in place and passing: deterministic notebooks,
 RockClock is currently private, tied to a manuscript in preparation.
 
 ### ML Geo Pixel Poppers
+
+*In plain terms: this project teaches a computer to recognize different minerals inside a rock scan by their chemical signature, the same way you might sort fruit by color and shape, and tests how well that works when two minerals look almost identical up close.*
 
 An earlier supervised-learning project using multi-element chemical maps to classify mineral phases.
 
@@ -170,4 +178,3 @@ I'm particularly interested in work where geoscience, applied ML, and technical 
 
 LinkedIn: [linkedin.com/in/nicole-m-aikin](https://www.linkedin.com/in/nicole-m-aikin)
 GitHub: [github.com/nicole-m-aikin](https://github.com/nicole-m-aikin)
-
