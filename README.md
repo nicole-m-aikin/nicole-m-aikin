@@ -18,65 +18,62 @@ I tend to approach ML as one line of evidence inside a geological decision frame
 
 ### Au + REE Placer Assessment Pipeline
 
-*In plain terms: I took decades of public government data on rocks, streams, and old mine sites and built a tool that ranks the most promising places to look for gold and rare earth elements in northeastern Washington, then checks whether mining any of them would actually pay off.*
+*In plain terms: I took decades of public stream-sediment and mine-site data and built a northeastern Washington screen for gold and rare-earth placers, then checked whether the score survives a data audit, whether it works on other belts, and whether any site would pay at a rare-earth price benchmark.*
 
-A config-driven, 10-module mineral exploration workflow for evaluating co-placer rare earth element and gold potential in northeastern Washington.
+A config-driven mineral exploration workflow for co-placer rare earth element and gold potential. The published product is a northeastern Washington lookalike model and a transfer test. California is a separate local walk list.
 
 The pipeline integrates:
 
 - NURE stream-sediment geochemistry
 - USGS MRDS mineral occurrences
-- aeromagnetics
-- lithology and spatial geology
-- LiDAR-derived terrain information
+- lithology and catchment geology
+- LiDAR-derived terrain on the California walk list
 - mine-waste geochemistry
 - REE and Au-pathfinder geochemistry
 - acid-base accounting
 - techno-economic assumptions
 
+Aeromagnetics were scored in an early rank and then excluded as synthetic.
+
 The analysis is structured around a source, pathway, trap, preservation mineral-systems framework.
 
 Key components include:
 
-- Random Forest prospectivity classification
-- anti-leakage label design using independent MRDS proximity
-- 5-fold stratified cross-validation
-- ROC-AUC of 0.891
-- 2,000-sample Monte Carlo uncertainty analysis
-- P10 / P50 / P90 endowment estimates
-- break-even NdPr pricing
-- NPV screening
-- tornado-style sensitivity analysis
-- multi-criterion target ranking
-- environmental risk screening
-- pytest unit tests and GitHub Actions CI
+- Random Forest prospectivity classification with MRDS-proximity labels
+- shuffled 5-fold ROC-AUC of 0.891 on the unvalidated extract
+- CIM audit: 287 of 1,045 NURE samples kept; validated scores 0.66 shuffled and 0.58 on spatial blocks; sample submitter alone scores 0.57
+- transfer test of the frozen Washington model: Idaho 0.50, California 0.52, Montana 0.34, Colorado 0.56, North Carolina Fall Zone 0.50
+- 2,000-sample Monte Carlo uncertainty analysis, P10 / P50 / P90 endowment estimates, break-even NdPr pricing, and tornado-style sensitivity analysis
+- Bossburg is the only site under the $109/kg NdPr benchmark, and its coordinate is unverified
+- environmental screening that flags Big Iron, Silver Bell, and Turk as acid-generating
+- pytest and GitHub Actions CI
 
-The goal is not to identify anomalous ground alone, but to connect geological evidence to model probability, uncertainty, economics, and field prioritization in a single traceable chain.
+The goal is to connect geological evidence to model probability, uncertainty, and economics, and to report the score that survives validation.
 
 [View repository](https://github.com/nicole-m-aikin/au-ree-placer-pipeline)
 
 ### Critical Minerals ASTER
 
-*In plain terms: satellites can sense heat patterns from space that hint at certain kinds of mineral deposits underground. This project tests whether that heat signal actually finds real deposits, or just re-finds the places people already explored decades ago, and it's built with statistical checks specifically designed to catch itself being fooled.*
+*In plain terms: a satellite measures how rock at the surface emits thermal infrared light. This project tests whether those patterns line up with known critical-mineral deposits, or only with the host rock and the places already mapped, and the statistics are built to catch a false match.*
 
-A remote sensing pipeline testing whether ASTER thermal infrared alteration signals correspond with known critical mineral occurrences, now covering 109 USGS Earth MRI districts across the western US.
+A remote sensing pipeline testing whether ASTER thermal infrared signals correspond with known critical mineral occurrences, covering 109 USGS Earth MRI districts. The current input is daytime AST_05 surface emissivity.
 
-The workflow validates satellite-derived spectral anomalies against USGS MRDS deposit records under a statistical framework built to catch its own false positives: a site-specific geometric null in place of an earlier pooled-null version that manufactured significance at sites with unusually large anomaly zones, Benjamini-Hochberg FDR correction across both a binomial test and a threshold-free continuous-score test, DBSCAN spatial declustering of non-independent MRDS records, and a classification-threshold sensitivity sweep.
+The workflow validates those signals against USGS MRDS deposit records. The primary null is bedrock-versus-cover, because an earlier radiance-ratio result tracked acquisition temperature. A geometric null is reported beside it. Benjamini-Hochberg FDR correction covers a binomial test and a threshold-free continuous-score test, with DBSCAN spatial declustering of MRDS records and a classification-threshold sensitivity sweep.
 
 Key features include:
 
 - automated ASTER processing across 109 sites, 58 of them added in a pre-registered expansion with a written detectability expectation recorded before the imagery was processed
-- site-specific geometric null and Benjamini-Hochberg FDR correction across the full test family
+- bedrock/cover-stratified null, with the geometric null reported alongside, and Benjamini-Hochberg FDR correction across the test family
 - DBSCAN spatial declustering of correlated MRDS records
 - classification-threshold sensitivity sweep
-- deposit-type performance comparison across skarn, porphyry, epithermal, VMS, and placer systems
+- deposit-type comparison, including pre-registered nulls for epithermal, Carlin-type, and uranium
 - YAML-driven site configuration
 - DuckDB outputs and a zero-credential demo mode
-- automated tests and reproducible batch workflows via GitHub Actions
+- automated tests and GitHub Actions CI
 
-Current results: 20 of 109 sites are FDR-significant on the primary binomial test, 31 on the continuous-score test. Thirteen sites hold up under every check, including spatial declustering, and nine of those are arid skarn or carbonate-replacement districts spanning Arizona, New Mexico, Texas, and California, pointing to a Southwest-wide detection pattern rather than one isolated belt. Skarn/carbonate-replacement is the only deposit-system category whose enrichment confidence interval excludes 1.0. A humid-terrain control of six skarn districts in Pennsylvania, New York, and Washington returns zero significant sites, consistent with a vegetation and exposure explanation for where the method fails. An earlier claim that the signal tracked historical discovery-era bias did not survive an unconditioned re-run and has been retracted: no era signal, 0.92x enrichment, p = 0.73.
+Current results: 19 of 108 sites are FDR-significant on the primary binomial test (23 under the geometric null). Three sites replicate on declustering, night imagery, and a multi-year mean: Courtland-Gleeson, Pioche, and Providence Mountains. Only Providence Mountains also survives a finer lithology null; Courtland-Gleeson and Pioche repeat the carbonate host package. Fourteen of 28 skarn and carbonate-replacement districts are significant, and that category's enrichment interval now reaches 1.0 (1.44×, 1.00–1.63). Pre-registered nulls held for epithermal (0/4), Carlin-type (0/6), and uranium (0/9). Humid skarn controls are untestable after vegetation masking. Discovery-era cohorts are enriched by similar amounts (pre-1950 1.39×, post-1950 1.32×).
 
-The question behind the project hasn't changed: is the signal detecting geology, or the places people already looked? The current answer is that TIR functions as a deposit-type selector, not a universal detector, and the failure modes are documented as carefully as the successes.
+The question behind the project hasn't changed: is the signal detecting geology, or the places people already looked? The current answer is that TIR functions as a deposit-type selector and a host-package map, not a demonstrated alteration detector.
 
 Zero-credential demo, no EarthData account or rasters required:
 
@@ -96,7 +93,7 @@ A pipeline for identifying chemically distinct domains in accessory minerals fro
 
 As of September 2026, RockClock is undergoing a full reproducibility and provenance audit ahead of publication. The project is being reframed from a domain-classification demo into a provenance-first workflow: it proposes candidate chemical regions and phase boundaries without automatically naming minerals or geological events, and every domain, phase, and age assignment routes through geologist review rather than treating a statistical cluster as a finished interpretation.
 
-Reproducibility infrastructure is in place and passing: deterministic notebooks, a pinned environment, automated validation, and continuous integration. End-to-end scientific reproduction against the original dataset is still in progress, pending recovery of the original raw maps, masks, and dated-spot tables. Several method choices, including normalization approach, retained PCA variance, and cluster count, remain open pending controlled comparison against held-out grains. Numbers reported in earlier drafts are being reconciled against this audit rather than restated here.
+Static reproducibility checks pass on the private research repository. End-to-end scientific reproduction against the original dataset is still in progress, pending recovery of the original raw maps, masks, and dated-spot tables. Several method choices, including normalization approach, retained PCA variance, and cluster count, remain open pending controlled comparison against held-out grains. Numbers reported in earlier drafts are being reconciled against this audit rather than restated here.
 
 RockClock is currently private, tied to a manuscript in preparation.
 
