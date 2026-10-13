@@ -20,7 +20,7 @@ I tend to approach ML as one line of evidence inside a geological decision frame
 
 *In plain terms: I took decades of public stream-sediment and mine-site data and built a northeastern Washington screen for gold and rare-earth placers, then checked whether the score survives a data audit, whether it works on other belts, and whether any site would pay at a rare-earth price benchmark.*
 
-A config-driven mineral exploration workflow for co-placer rare earth element and gold potential. The published product is a northeastern Washington lookalike model and a transfer test. California is a separate local walk list.
+A config-driven mineral exploration workflow for co-placer rare earth element and gold potential. The published product is a northeastern Washington lookalike model, served as a live API, and a transfer test. California is a separate walk list: a public pin map for the Sierra, plus belt screens in the repo.
 
 The pipeline integrates:
 
@@ -47,6 +47,8 @@ Key components include:
 - Bossburg is the only site under the $109/kg NdPr benchmark, and its coordinate is unverified
 - environmental screening that flags Big Iron, Silver Bell, and Turk as acid-generating
 - pytest and GitHub Actions CI
+- live Washington lookalike API: [placer-lookalike.onrender.com/docs](https://placer-lookalike.onrender.com/docs)
+- California pin map: [ca-placer-pins](https://nmaikin27.users.earthengine.app/view/ca-placer-pins)
 
 The goal is to connect geological evidence to model probability, uncertainty, and economics, and to report the score that survives validation.
 
@@ -54,9 +56,9 @@ The goal is to connect geological evidence to model probability, uncertainty, an
 
 ### Critical Minerals ASTER
 
-*In plain terms: a satellite measures how rock at the surface emits thermal infrared light. This project tests whether those patterns line up with known critical-mineral deposits, or only with the host rock and the places already mapped, and the statistics are built to catch a false match.*
+*In plain terms: a satellite measures how rock at the surface emits thermal infrared light. This project tests whether those patterns line up with known critical-mineral deposits, or only with the host rock and the places already mapped. Where a hyperspectral flight exists, a second sensor checks for clay alteration. The statistics are built to catch a false match.*
 
-A remote sensing pipeline testing whether ASTER thermal infrared signals correspond with known critical mineral occurrences, covering 109 USGS Earth MRI districts. The current input is daytime AST_05 surface emissivity.
+A remote sensing pipeline testing whether ASTER thermal infrared signals correspond with known critical mineral occurrences, covering 109 USGS Earth MRI districts. The current input is daytime AST_05 surface emissivity. GEMx AVIRIS supplies a SWIR clay check on the districts a flight actually covered.
 
 The workflow validates those signals against USGS MRDS deposit records. The primary null is bedrock-versus-cover, because an earlier radiance-ratio result tracked acquisition temperature. A geometric null is reported beside it. Benjamini-Hochberg FDR correction covers a binomial test and a threshold-free continuous-score test, with DBSCAN spatial declustering of MRDS records and a classification-threshold sensitivity sweep.
 
@@ -71,9 +73,11 @@ Key features include:
 - DuckDB outputs and a zero-credential demo mode
 - automated tests and GitHub Actions CI
 
-Current results: 19 of 108 sites are FDR-significant on the primary binomial test (23 under the geometric null). Three sites replicate on declustering, night imagery, and a multi-year mean: Courtland-Gleeson, Pioche, and Providence Mountains. Only Providence Mountains also survives a finer lithology null; Courtland-Gleeson and Pioche repeat the carbonate host package. Fourteen of 28 skarn and carbonate-replacement districts are significant, and that category's enrichment interval now reaches 1.0 (1.44×, 1.00–1.63). Pre-registered nulls held for epithermal (0/4), Carlin-type (0/6), and uranium (0/9). Humid skarn controls are untestable after vegetation masking. Discovery-era cohorts are enriched by similar amounts (pre-1950 1.39×, post-1950 1.32×).
+Current thermal results: 19 of 108 sites are FDR-significant on the primary binomial test (23 under the geometric null). Three sites replicate on declustering, night imagery, and a multi-year mean: Courtland-Gleeson, Pioche, and Providence Mountains. Only Providence Mountains also survives a finer lithology null; Courtland-Gleeson and Pioche repeat the carbonate host package. Fourteen of 28 skarn and carbonate-replacement districts are significant, and that category's enrichment interval reaches 1.0 (1.44×, 1.00–1.63). Pre-registered nulls held for epithermal (0/4), Carlin-type (0/6), and uranium (0/9). Humid skarn controls are untestable after vegetation masking. Discovery-era cohorts are enriched by similar amounts (pre-1950 1.39×, post-1950 1.32×).
 
-The question behind the project hasn't changed: is the signal detecting geology, or the places people already looked? The current answer is that TIR functions as a deposit-type selector and a host-package map, not a demonstrated alteration detector.
+The SWIR check is a second result, not a replacement. On the 19 FDR sites, 14 are complementary to the thermal zones and none overlap. On the 40-site equal-area census, the SWIR hit rate is 30.4% and the thermal hit rate is 21.2% at the same map area, and the thermal map is nearer at 25 of 40 sites. SWIR coverage is 71 of 109 districts; 38 have none.
+
+The question behind the project hasn't changed: is the signal detecting geology, or the places people already looked? Thermal infrared works as a host-rock screen. SWIR does the clay check where GEMx flew. Together they are a two-sensor screen, not one ore detector.
 
 Zero-credential demo, no EarthData account or rasters required:
 
