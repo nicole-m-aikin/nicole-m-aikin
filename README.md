@@ -89,6 +89,26 @@ python -m critical_minerals_aster demo
 
 [View repository](https://github.com/nicole-m-aikin/critical-minerals-aster)
 
+### GEMx Spectral Map
+
+*In plain terms: a hyperspectral airplane records how rocks reflect light in the short-wave infrared. This project groups pixels into anonymous mineral domains, stops for a geologist keep/drop audit before anything is named, and treats library mineral hits as proposals — not labels. Cuprite is the development site; Mountain Pass is a separate transfer spit.*
+
+A standalone GEMx / AVIRIS-5 SWIR mineral-**domain** map package. It is not RockClock and does not write into the geochronology repo. Anonymous SWIR features, wavelength-position fields, scene masks, and library-match proposals live here; USGS Tetracorder remains the official naming path.
+
+Key components include:
+
+- AVIRIS-5 L2A granules confirmed before download; Day 1 quicklooks put pixels on screen
+- Cuprite Phase 2 GMM + Potts/MRF domain split that **stops** for expert keep/drop (this spit: keep 0+1+2+7; drop 3+4+5+6; first BIC elbow k=4, working oversplit k=8)
+- class IDs that do not transfer across sites, grains, or chemistry recipes
+- Phase 3 library-match proposals with a refuse path; score is λ2200 spatial trend, not a named mineral OA
+- frozen Cuprite recipe applied to Mountain Pass as a new spit that again stops for keep/drop
+- NURE HSSR sediment chemistry attached where samples exist (not a GMM channel)
+- pytest coverage for acquisition, spectral features, audits, and phase scripts
+
+This is the deeper SWIR map path beside the ASTER TIR host-rock screen: domains first, names only after audit.
+
+[View repository](https://github.com/nicole-m-aikin/gemx-spectral-map)
+
 ### RockClock
 
 *In plain terms: monazite crystals record a rock's history the way tree rings record a tree's, but reading those rings by eye means two scientists can look at the same crystal and reach different conclusions. RockClock flags the different chemical "rings" inside a crystal using a documented, repeatable process, then hands the reading to a geologist to confirm rather than treating the computer's output as the final word.*
