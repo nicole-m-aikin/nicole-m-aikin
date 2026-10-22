@@ -16,6 +16,9 @@ I tend to approach ML as one line of evidence inside a geological decision frame
 
 ## Featured Projects
 
+Project results change as validation work lands. The linked repository READMEs are the
+current source of record; this profile is a portfolio summary.
+
 ### Au + REE Placer Assessment Pipeline
 
 *In plain terms: I took decades of public stream-sediment and mine-site data and built a northeastern Washington screen for gold and rare-earth placers, then checked whether the score survives a data audit, whether it works on other belts, and whether any site would pay at a rare-earth price benchmark.*
@@ -40,14 +43,12 @@ The analysis is structured around a source, pathway, trap, preservation mineral-
 Key components include:
 
 - Random Forest prospectivity classification with MRDS-proximity labels
-- shuffled 5-fold ROC-AUC of 0.891 on the unvalidated extract
-- CIM audit: 287 of 1,045 NURE samples kept; validated scores 0.66 shuffled and 0.58 on spatial blocks; sample submitter alone scores 0.57
+- CIM audit: 287 of 1,045 NURE samples kept; the validated result of record is 0.58 block-CV ROC-AUC (0.66 shuffled), and sample submitter alone scores 0.57
 - transfer test of the frozen Washington model: Idaho 0.50, California 0.52, Montana 0.34, Colorado 0.56, North Carolina Fall Zone 0.50
 - 2,000-sample Monte Carlo uncertainty analysis, P10 / P50 / P90 endowment estimates, break-even NdPr pricing, and tornado-style sensitivity analysis
 - Bossburg is the only site under the $109/kg NdPr benchmark, and its coordinate is unverified
 - environmental screening that flags Big Iron, Silver Bell, and Turk as acid-generating
 - pytest and GitHub Actions CI
-- live Washington lookalike API: [placer-lookalike.onrender.com/docs](https://placer-lookalike.onrender.com/docs)
 - California pin map: [ca-placer-pins](https://nmaikin27.users.earthengine.app/view/ca-placer-pins)
 
 The goal is to connect geological evidence to model probability, uncertainty, and economics, and to report the score that survives validation.
@@ -73,7 +74,7 @@ Key features include:
 - DuckDB outputs and a zero-credential demo mode
 - automated tests and GitHub Actions CI
 
-Current thermal results: 19 of 108 sites are FDR-significant on the primary binomial test (23 under the geometric null). Three sites replicate on declustering, night imagery, and a multi-year mean: Courtland-Gleeson, Pioche, and Providence Mountains. Only Providence Mountains also survives a finer lithology null; Courtland-Gleeson and Pioche repeat the carbonate host package. Fourteen of 28 skarn and carbonate-replacement districts are significant, and that category's enrichment interval reaches 1.0 (1.44×, 1.00–1.63). Pre-registered nulls held for epithermal (0/4), Carlin-type (0/6), and uranium (0/9). Humid skarn controls are untestable after vegetation masking. Discovery-era cohorts are enriched by similar amounts (pre-1950 1.39×, post-1950 1.32×).
+Current thermal results: 19 of 108 sites are FDR-significant on the primary binomial test (23 under the geometric null). **Ten are robust at every spatial-declustering radius.** A different, stricter acquisition-replication test leaves **three** sites that reproduce under declustering, night imagery, and a multi-year mean: Courtland-Gleeson, Pioche, and Providence Mountains. Only **Providence Mountains** also survives the finer 8-class lithology null; Courtland-Gleeson and Pioche repeat the carbonate host package. Fourteen of 28 skarn and carbonate-replacement districts are significant, and that category's enrichment interval reaches 1.0 (1.44×, 1.00–1.63). Pre-registered nulls held for epithermal (0/4), Carlin-type (0/6), and uranium (0/9). Humid skarn controls are untestable after vegetation masking. Discovery-era cohorts are enriched by similar amounts (pre-1950 1.39×, post-1950 1.32×).
 
 The SWIR check is a second result, not a replacement. On the 19 FDR sites, 14 are complementary to the thermal zones and none overlap. On the 40-site equal-area census, the SWIR hit rate is 30.4% and the thermal hit rate is 21.2% at the same map area, and the thermal map is nearer at 25 of 40 sites. SWIR coverage is 71 of 109 districts; 38 have none.
 
